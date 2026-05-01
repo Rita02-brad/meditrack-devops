@@ -102,5 +102,10 @@ curl -X DELETE http://localhost:5000/patients/1
 ```
 
 ---
-
+## Architecture                                                                            
+Infrastructure: Provisioned using AWS CloudFormation (Jenkins EC2 server + VPC + EKS Cluster)
+CI/CD: GitHub → Jenkins Pipeline (test, build Docker image, push to Docker Hub)
+Deployment: Docker container deployed on Amazon EKS with 3 replicas and LoadBalancer service
+Monitoring: Prometheus + Grafana for cluster and pod metrics
+The pipeline automatically builds and deploys the app whenever code
 > Note: All data is stored in memory. It resets every time the server restarts. This is intentional for training purposes.

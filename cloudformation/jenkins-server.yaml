@@ -91,25 +91,28 @@ Resources:
       IamInstanceProfile: !Ref MyInstanceProfile
       KeyName: keypair-jenkins
       UserData:
-        Fn::Base64: !Sub |
+  Fn::Base64: !Sub |
 
-          yum update -y
+    dnf update -y
 
-          amazon-linux-extras install java-openjdk11 -y
+    dnf install java-21-amazon-corretto -y
 
-          wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
-          rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
-          yum install jenkins -y
+    wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+    rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
 
-          systemctl enable jenkins
-          systemctl start jenkins
+    dnf install jenkins -y
 
-          yum install docker -y
-          systemctl start docker
-          systemctl enable docker
-          usermod -aG docker ec2-user
+    systemctl enable jenkins
+    systemctl start jenkins
 
-          yum install git -y
+    dnf install docker -y
+    systemctl enable docker
+    systemctl start docker
+
+    usermod -aG docker ec2-user
+    usermod -aG docker jenkins
+
+    dnf install git -y
 
 Outputs:
   PublicIP:

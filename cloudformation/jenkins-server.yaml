@@ -63,7 +63,6 @@ Resources:
   MyIAMRole:
     Type: AWS::IAM::Role
     Properties:
-      RoleName: 
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
         Statement:

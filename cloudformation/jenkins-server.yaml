@@ -63,6 +63,7 @@ Resources:
   MyIAMRole:
     Type: AWS::IAM::Role
     Properties:
+      RoleName: JenkinsEC2Role
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
         Statement:
